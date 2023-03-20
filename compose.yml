@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  d2l:
+    image: nginx
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - target: 2375
+        published: 2375
+        mode: host
+    deploy:
+      mode: global
+configs:
+  nginx_conf:
+    file: nginx.conf
